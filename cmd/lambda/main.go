@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"log"
+	"strings"
 	"time"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -16,31 +18,29 @@ const LambdaTimeoutDuration = 15 * time.Second
 var svc, _ = service.NewServices(&config.Config{IsRunningInCloud: true}, nil)
 var handler = handlers.Handlers{DB: svc.GetDB()}
 
-func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	ApiResponse := events.APIGatewayProxyResponse{}
-	switch request.HTTPMethod {
-	case "GET":
-		id := request.PathParameters["id"]
+func HandleRequest(request events.APIGatewayV2HTTPRequest) (events.APIGatewayV2HTTPResponse, error) {
 
+	ApiResponse := events.APIGatewayV2HTTPResponse{}
+	log.Printf("came in with request %v", request)
+	if strings.HasPrefix(request.RouteKey, "GET") {
+		id := request.PathParameters["id"]
 		if id != "" {
 			// get by id
 			status, user := handler.GetUser(id)
-			ApiResponse = events.APIGatewayProxyResponse{Body: marshalToString(user), StatusCode: status}
+			ApiResponse = events.APIGatewayV2HTTPResponse{Body: marshalToString(user), StatusCode: status}
 		} else {
 			// get all
 			status, users := handler.GetAllUsers()
-			ApiResponse = events.APIGatewayProxyResponse{Body: marshalToString(users), StatusCode: status}
+			ApiResponse = events.APIGatewayV2HTTPResponse{Body: marshalToString(users), StatusCode: status}
 		}
-
-	case "POST":
+	} else if strings.HasPrefix(request.RouteKey, "POST") {
 		status, err := handler.AddUser(request.Body)
 		body := ""
 		if err != nil {
 			body = "error adding user" + err.Error()
-
 		}
 
-		ApiResponse = events.APIGatewayProxyResponse{Body: body, StatusCode: status}
+		ApiResponse = events.APIGatewayV2HTTPResponse{Body: body, StatusCode: status}
 	}
 	// Response
 	return ApiResponse, nil
