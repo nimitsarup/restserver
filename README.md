@@ -22,7 +22,7 @@ Please let me know if you would like to see an implementation with any OR both o
   - Create lambda function () -```aws lambda create-function --function-name $functionName --runtime go1.x --role $rolearn --handler main --zip-file {main.zip} ```
   - Create api gateway with 3 routes, /users POST, /users GET and /users/{id} GET ```aws apigateway create-rest-api --name pouserserviceAPI --endpoint-configuration types=REGIONAL```
   - Add routes using ```aws apigateway put-method```
-  - Use api-gateway invoke URL from commandline or postman to invoke.
+  - Use api-gateway invoke URL from commandline or postman.
 - The one i created in cloud - ```https://e6xjgviiaj.execute-api.eu-west-2.amazonaws.com/users```
 
 # Makefile tagets
