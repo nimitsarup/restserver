@@ -20,3 +20,9 @@ build:
 debug:
 	go build -tags 'production' -o $(BINPATH)/local-server cmd/local/main.go
 	$(BINPATH)/local-server
+
+.PHONY: build-lambda-archive
+build-lambda-archive:
+	env GOOS=linux GOARCH=amd64 go build -o $(BINPATH)/lambda-server cmd/lambda/main.go
+	zip -j $(BINPATH)/lambda-server.zip $(BINPATH)/lambda-server
+

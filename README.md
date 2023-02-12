@@ -12,11 +12,17 @@ Please let me know if you would like to see an implementation with any OR both o
 - Used godog for feature tests (see folder 'features')
 - Can spin up service both locally (cmd/local/main.go) OR in the cloud as lambda (cmd/lambda/main.go).
 
+# Lambda platform limitations
+- Build the lambda as arm64 (aws-lambda prefered architecture)
+- The maximum time a lambda can remain hot is 15 mins (more than sufficient for a REST call)
+- Payload limitation is 6MB (again more than sufficient for our use-case of a tiny json payload).
+
 # Makefile tagets
 - Unit tests (make test)
 - Integration tests (make test-component)
 - Linting (make lint)
 - debug, build.
+- build-lambda
 
 # Sample execution
 ```sh
