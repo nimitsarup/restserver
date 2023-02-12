@@ -1,4 +1,4 @@
-# restserver
+# Post Office Users Service
 Simple rest server with tests (unit+integration)
 
 #IMPORTANT
