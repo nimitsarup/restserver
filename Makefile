@@ -23,6 +23,6 @@ debug:
 
 .PHONY: build-lambda-archive
 build-lambda-archive:
-	env GOOS=linux GOARCH=amd64 go build -o $(BINPATH)/lambda-server cmd/lambda/main.go
+	env GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o $(BINPATH)/lambda-server cmd/lambda/main.go
 	zip -j $(BINPATH)/lambda-server.zip $(BINPATH)/lambda-server
 

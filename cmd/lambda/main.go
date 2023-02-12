@@ -13,12 +13,10 @@ import (
 
 const LambdaTimeoutDuration = 15 * time.Second
 
-func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-	//ctx, cancel := context.WithTimeout(context.Background(), LambdaTimeoutDuration)
-	//defer cancel()
-	svc, _ := service.NewServices(&config.Config{IsRunningInCloud: true}, nil)
-	handler := handlers.Handlers{DB: svc.GetDB()}
+var svc, _ = service.NewServices(&config.Config{IsRunningInCloud: true}, nil)
+var handler = handlers.Handlers{DB: svc.GetDB()}
 
+func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
 	ApiResponse := events.APIGatewayProxyResponse{}
 	switch request.HTTPMethod {
 	case "GET":
