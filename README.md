@@ -22,7 +22,7 @@ Please let me know if you would like to see an implementation with any OR both o
 - Integration tests (make test-component)
 - Linting (make lint)
 - debug, build.
-- build-lambda
+- build-lambda-archive
 
 # Sample execution
 ```sh
