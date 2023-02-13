@@ -35,11 +35,11 @@ Please let me know if you would like to see an implementation with any OR both o
 # Sample execution
 ```sh
 // ADD USER
-nsarup@MONSTER:~/po/restserver$ curl -d '{"name":"user1", "email": "user1@postoffice", "password": "plaintext"}' -H "Content-Type: application/json" -X POST -w "%{http_code}\n" https://e6xjgviiaj.execute-api.eu-west-2.amazonaws.com/users
+curl -d '{"name":"user1", "email": "user1@postoffice", "password": "plaintext"}' -H "Content-Type: application/json" -X POST -w "%{http_code}\n" https://e6xjgviiaj.execute-api.eu-west-2.amazonaws.com/users
 201
 
 // GET ALL USERS
-nsarup@MONSTER:~/po/restserver$ curl -i -X GET https://e6xjgviiaj.execute-api.eu-west-2.amazonaws.com/users
+curl -i -X GET https://e6xjgviiaj.execute-api.eu-west-2.amazonaws.com/users
 HTTP/2 200 
 date: Sun, 12 Feb 2023 20:13:01 GMT
 content-type: text/plain; charset=utf-8
@@ -49,7 +49,7 @@ apigw-requestid: APg8HjwOrPEEPaw=
 [{"id":"c6868250-f956-49fe-8bdd-4f3406ec10e7","name":"Nimit3","email":"n@saru"},{"id":"3f203913-1652-4ed7-9925-56cd7efc1d64","name":"user1","email":"user1@postoffice"}]
 
 // GET USER BY ID
-nsarup@MONSTER:~/po/restserver$ curl -i -X GET https://e6xjgviiaj.execute-api.eu-west-2.amazonaws.com/users/3f203913-1652-4ed7-9925-56cd7efc1d64
+curl -i -X GET https://e6xjgviiaj.execute-api.eu-west-2.amazonaws.com/users/3f203913-1652-4ed7-9925-56cd7efc1d64
 HTTP/2 200 
 date: Sun, 12 Feb 2023 20:14:11 GMT
 content-type: text/plain; charset=utf-8
